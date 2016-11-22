@@ -1,10 +1,13 @@
 package ru.naumen.controllers;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.beans.factory.annotation.Qualifier;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.RequestMapping;
 import ru.naumen.model.StudentDao;
+
+import javax.inject.Named;
 
 /**
  * @author aarkaev
@@ -12,7 +15,7 @@ import ru.naumen.model.StudentDao;
 @Controller
 public class HomeController {
 
-    @Autowired
+    @Autowired @Qualifier("jpaStudentDao")
     private StudentDao storage;
 
     @RequestMapping("/")

@@ -1,14 +1,29 @@
 package ru.naumen.entities;
 
+
+import javax.persistence.*;
+
+
 /**
  * @author aarkaev
  * @since 19.11.2016
  */
-public class Student {
-    private int id;
 
-    private String firstName;
+@Entity
+@Table(name = "TBL_STUDENT")
+public class Student {
+	@Id
+	@GeneratedValue(strategy = GenerationType.AUTO)
+	private int id;
+
+	@Column(name = "firstName", length = 100, nullable = false)
+	private String firstName;
+
+	@Column(name = "lastName", length = 100, nullable = false)
     private String lastName;
+
+	@ManyToOne
+	@JoinColumn(name = "course", foreignKey = @ForeignKey(name = "FK_STUDENT_COURSE"))
     private Course course;
 
     public String getFirstName() {

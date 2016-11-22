@@ -1,6 +1,7 @@
 package ru.naumen;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.beans.factory.annotation.Qualifier;
 import org.springframework.boot.CommandLineRunner;
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
@@ -19,13 +20,13 @@ public class RestServerApplication {
         SpringApplication.run(RestServerApplication.class, args);
     }
 
-    @Autowired
+    @Autowired  @Qualifier("jpaStudentDao")
     private StudentDao _studentDao;
 
-    @Autowired
+    @Autowired @Qualifier("jpaCourseDao")
     private CourseDao _courseDao;
 
-    @Autowired
+    @Autowired @Qualifier("jpaScholarshipDao")
     private ScholarshipDao _scholarshipDao;
 
     @Bean
@@ -45,8 +46,8 @@ public class RestServerApplication {
             scholarship.setStudent(student);
             scholarship.setAmount(1500);
 
-            _studentDao.create(student);
             _courseDao.create(course);
+            _studentDao.create(student);
             _scholarshipDao.create(scholarship);
         };
     }

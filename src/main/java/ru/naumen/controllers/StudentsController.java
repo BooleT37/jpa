@@ -3,6 +3,7 @@ package ru.naumen.controllers;
 import java.util.List;
 import java.util.Optional;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.beans.factory.annotation.Qualifier;
 import org.springframework.http.MediaType;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.PathVariable;
@@ -16,19 +17,21 @@ import ru.naumen.model.CourseDao;
 import ru.naumen.model.ScholarshipDao;
 import ru.naumen.model.StudentDao;
 
+import javax.inject.Named;
+
 /**
  * @author aarkaev
  */
 @RestController
 public class StudentsController {
 
-    @Autowired
+    @Autowired @Qualifier("jpaStudentDao")
     private StudentDao _studentDao;
 
-    @Autowired
+    @Autowired @Qualifier("jpaCourseDao")
     private CourseDao _courseDao;
 
-    @Autowired
+    @Autowired @Qualifier("jpaScholarshipDao")
     private ScholarshipDao _scholarshipDao;
 
     @RequestMapping(value = "/allstudents", method = RequestMethod.GET)
